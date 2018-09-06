@@ -105,7 +105,11 @@ const data = [
   5
 ];
 
-const sortedData = data.concat().sort();
+const sortedData = data.concat().sort(function(a, b) {
+  return a - b;
+});
+// console.log(sortedData);
+// console.log(sortedData[50]);
 
 class App extends Component {
   constructor(props) {
@@ -134,7 +138,9 @@ class App extends Component {
     return;
   }
 
-  binarySubmit(arr, value, start = 0, end = arr.length, counter = 0) {
+  binarySubmit(arr, value, bStart, bEnd, counter = 0) {
+    let start = bStart === undefined ? 0 : bStart;
+    let end = bEnd === undefined ? arr.length : bEnd;
     if (start > end) {
       this.setState({
         binaryResult: `Search Failed after ${counter} tries!`
@@ -143,7 +149,7 @@ class App extends Component {
     const index = Math.floor((start + end) / 2);
     const item = arr[index];
     console.log(start, end);
-    if (item == value) {
+    if (item === value) {
       return this.setState({
         binaryResult: `Search took ${counter + 1} tries!`
       });
