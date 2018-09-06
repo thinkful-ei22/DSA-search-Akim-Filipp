@@ -177,9 +177,44 @@ function mSort(array) {
   return merge(left, right, array);
 }
 
+//Bucket Sort
+// 1 and 98
+
+function bucketSort(array, lowest, highest) {
+  if (array.length === 0) {
+    return array;
+  }
+
+  const bucketSize = 5;
+  const minValue = lowest;
+  const maxValue = highest;
+  let bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+  let buckets = new Array(bucketCount);
+  for (let i = 0; i < buckets.length; i++) {
+    buckets[i] = [];
+  }
+
+  for (let i = 0; i < array.length; i++) {
+    buckets[Math.floor((array[i] - minValue) / bucketSize)].push(array[i]);
+  }
+
+  buckets.forEach(bucket => mSort(bucket));
+  let resultArray = [];
+  for (let i =0; i < buckets.length; i++) {
+    resultArray = [...resultArray, ...buckets[i]];
+  }
+
+  return resultArray;
+}
+
+
+//TESTING
+
 //console.log(qSort(data));
 //console.log(mSort(data));
-qSort(data);
-console.log('Quick Sort operations:', quickSortCounter);
-mSort(data);
-console.log('Merge sort operations', mergeSortCounter);
+// qSort(data);
+// console.log('Quick Sort operations:', quickSortCounter);
+// mSort(data);
+// console.log('Merge sort operations', mergeSortCounter);
+
+console.log(bucketSort(data, 1, 98));
