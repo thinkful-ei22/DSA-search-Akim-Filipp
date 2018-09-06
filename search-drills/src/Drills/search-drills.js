@@ -52,7 +52,7 @@ class BinarySearchTree {
     if (key > this.key && this.right) {
       return this.right.find(key);
     }
-    throw new Error("Nothing found. Everything went wrong.");
+    throw new Error('Nothing found. Everything went wrong.');
   }
 
   remove(key) {
@@ -102,9 +102,38 @@ class BinarySearchTree {
     }
     return this.left._findMinimum();
   }
+
+  preOrder() {
+    console.log(this.key);
+    if (this.left) {
+      this.left.preOrder();
+    }
+    if (this.right) {
+      this.right.preOrder();
+    }
+  }
+
+  inOrder() {
+    if (this.left) {
+      this.left.inOrder();
+    }
+    console.log(this.key);
+    if (this.right) {
+      this.right.inOrder();
+    }
+  }
+
+  postOrder() {
+    if (this.left) {
+      this.left.postOrder();
+    }
+    if (this.right) {
+      this.right.postOrder();
+    }
+    console.log(this.key);
+  }
 }
 
-module.exports = BinarySearchTree;
 
 const drillBST = new BinarySearchTree();
 
@@ -124,8 +153,8 @@ drillBST.insert(66);
 drillBST.insert(90);
 drillBST.insert(22);
 
-function preOrder(tree) {
-  console.log(tree);
-}
+// drillBST.preOrder();
+// drillBST.inOrder();
+//drillBST.postOrder();
 
-preOrder(drillBST);
+module.exports = BinarySearchTree;
